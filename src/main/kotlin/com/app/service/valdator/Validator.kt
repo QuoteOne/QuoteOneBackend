@@ -24,7 +24,8 @@ enum class ValidationType {
     IS_FALSE,
 
     // General / Cross-type
-    REQUIRED
+    REQUIRED,
+    OPTIONS // for validating against a set of allowed values
 }
 
 
