@@ -25,7 +25,7 @@ object ValidatorFactory {
         ValidationType.MIN_LENGTH to MinLengthValidator(),
         ValidationType.MAX_LENGTH to MaxLengthValidator(),
         ValidationType.REGEX to RegexValidator(),
-        ValidationType.DATE to DateValidator()
+
     )
 
     /**

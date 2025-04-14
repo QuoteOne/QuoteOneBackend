@@ -10,7 +10,7 @@ class GreaterThanValidator : BaseValidator(
     supportedTypes = setOf(ValueType.NUMBER)
 ) {
     
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
         validateType(policy, value)?.let { return it }
         
         val numericValue = (value as Number).toDouble()

@@ -15,7 +15,7 @@ abstract class BaseValidator(
     
     override fun isSupportType(type: ValueType): Boolean = supportedTypes.contains(type)
     
-    protected fun validateType(policy: ValidationPolicy, value: Any?): Validation? {
+    protected fun validateType(policy: ValidationPolicy, value: Any): Validation? {
         val valueType = when (value) {
             is String -> ValueType.STRING
             is Number -> ValueType.NUMBER

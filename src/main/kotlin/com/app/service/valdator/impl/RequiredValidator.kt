@@ -10,14 +10,10 @@ class RequiredValidator : BaseValidator(
     supportedTypes = ValueType.entries.toSet()
 ) {
     
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
         validateType(policy, value)?.let { return it }
         
         return when (value) {
-            null -> Validation(
-                failed = true,
-                reason = "${policy.name}: Value is required"
-            )
             is String -> if (value.isBlank()) {
                 Validation(
                     failed = true,
@@ -30,14 +26,6 @@ class RequiredValidator : BaseValidator(
                 Validation(
                     failed = true,
                     reason = "${policy.name}: Array cannot be empty"
-                )
-            } else {
-                Validation(failed = false, reason = null)
-            }
-            is Collection<*> -> if (value.isEmpty()) {
-                Validation(
-                    failed = true,
-                    reason = "${policy.name}: Collection cannot be empty"
                 )
             } else {
                 Validation(failed = false, reason = null)

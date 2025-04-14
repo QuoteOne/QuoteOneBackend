@@ -8,7 +8,9 @@ class GreaterThanOrEqualValidator : BaseValidator(
     supportedTypes = setOf(ValueType.NUMBER)
 ) {
 
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
+        validateType(policy, value)?.let { return it }
+
         val numericValue = when (value) {
             is Number -> value.toDouble()
             is String -> value.toDoubleOrNull()

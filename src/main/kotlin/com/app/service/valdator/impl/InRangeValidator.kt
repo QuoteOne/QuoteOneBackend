@@ -2,17 +2,16 @@ package com.app.service.valdator.impl
 
 import com.app.service.valdator.*
 
-class InRangeValidator : IValidator {
+class InRangeValidator : BaseValidator(
+    validationType = ValidationType.IN_RANGE,
+    supportedTypes = setOf(ValueType.NUMBER)
+) {
     override val validationType: ValidationType = ValidationType.IN_RANGE
-    override fun supports(): Iterable<ValueType> {
-        TODO("Not yet implemented")
-    }
 
-    override fun isSupportType(type: ValueType): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
+        validateType(policy, value)?.let { return it }
 
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
+
         // Expecting value in format "min,max"
         val rangeValues = policy.value.split(",").toList()
         if (rangeValues.size != 2 || rangeValues.any { it.toDoubleOrNull() == null }) {

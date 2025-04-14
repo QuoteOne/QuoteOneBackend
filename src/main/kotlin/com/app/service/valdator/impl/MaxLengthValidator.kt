@@ -10,9 +10,9 @@ class MaxLengthValidator : BaseValidator(
     supportedTypes = setOf(ValueType.STRING)
 ) {
     
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
         validateType(policy, value)?.let { return it }
-        
+
         val stringValue = value as String
         val maxLength = policy.value.toIntOrNull() ?: return Validation(
             failed = true,

@@ -38,5 +38,5 @@ interface IValidator {
     val validationType: ValidationType
     fun supports(): Iterable<ValueType>
     fun isSupportType(type: ValueType): Boolean
-    fun validate(policy: ValidationPolicy, value: Any?): Validation
+    fun validate(policy: ValidationPolicy, value: Any): Validation
 }

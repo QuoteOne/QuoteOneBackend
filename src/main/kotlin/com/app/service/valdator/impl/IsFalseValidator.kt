@@ -3,17 +3,15 @@ package com.app.service.valdator.impl
 import com.app.service.valdator.*
 
 
-class IsFalseValidator : IValidator {
+class IsFalseValidator : BaseValidator(
+    validationType = ValidationType.IS_FALSE,
+    supportedTypes = setOf(ValueType.BOOLEAN)
+) {
     override val validationType: ValidationType = ValidationType.IS_FALSE
-    override fun supports(): Iterable<ValueType> {
-        TODO("Not yet implemented")
-    }
 
-    override fun isSupportType(type: ValueType): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
+        validateType(policy, value)?.let { return it }
 
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
         val boolValue = when (value) {
             is Boolean -> value
             is String -> value.lowercase() == "true"

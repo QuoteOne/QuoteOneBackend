@@ -10,7 +10,7 @@ class IsTrueValidator : BaseValidator(
     supportedTypes = setOf(ValueType.BOOLEAN)
 ) {
     
-    override fun validate(policy: ValidationPolicy, value: Any?): Validation {
+    override fun validate(policy: ValidationPolicy, value: Any): Validation {
         validateType(policy, value)?.let { return it }
         
         val boolValue = value as Boolean
