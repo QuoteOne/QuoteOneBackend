@@ -1,5 +1,7 @@
 package com.app.service.valdator
 
+import com.app.repository.models.ValidationPolicy
+
 enum class ValidationType {
     // String
     CONTAINS,

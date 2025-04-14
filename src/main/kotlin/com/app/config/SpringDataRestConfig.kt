@@ -1,5 +1,7 @@
 package com.app.config
 
+import com.app.repository.models.EntityValues
+import com.app.repository.models.ValidationPolicy
 import com.security.repository.User
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,6 +17,8 @@ class SpringDataRestConfig {
         return RepositoryRestConfigurer.withConfig { config: RepositoryRestConfiguration ->
             config.exposeIdsFor(
                 User::class.java,
+                EntityValues::class.java,
+                ValidationPolicy::class.java
             )
         }
     }

@@ -1,8 +1,6 @@
 package com.app.service.valdator
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import java.util.UUID
+import com.app.repository.models.ValidationPolicy
 
 
 // Don't add more types for simplicity.
@@ -15,20 +13,11 @@ enum class ValueType(
     DATE("DATE")
 }
 
-@Entity
-class ValidationPolicy(
-    @Id
-    val id: UUID,
-    val name: String,
-    val attribute: String,
-    val validationType: ValidationType,
-    val valueType: ValueType,
-    val value: String
-)
+
 
 interface IValidationRequired {
-    val validationPolicies: Iterable<ValidationPolicy>
-    val values: Map<String, Any>
+    val validationPolicies: MutableSet<ValidationPolicy>
+    val values: MutableMap<String, Any>
 
     fun validate() {
         for (policy in validationPolicies) {

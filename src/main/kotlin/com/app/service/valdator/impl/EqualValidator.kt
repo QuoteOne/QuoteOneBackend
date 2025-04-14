@@ -1,5 +1,6 @@
 package com.app.service.valdator.impl
 
+import com.app.repository.models.ValidationPolicy
 import com.app.service.valdator.*
 
 class EqualValidator : BaseValidator(

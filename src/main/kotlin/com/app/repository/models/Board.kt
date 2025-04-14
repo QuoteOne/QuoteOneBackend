@@ -1,7 +1,15 @@
 package com.app.repository.models
 
-import com.app.service.valdator.IValidationRequired
-import com.app.service.valdator.ValidationPolicy
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToOne
+import jakarta.persistence.Table
+import java.util.*
 
 
 // SKU stands for Stock Keeping Unit. It is a unique identifier assigned by a company to track a product in inventory, sales, and logistics.
@@ -9,16 +17,32 @@ import com.app.service.valdator.ValidationPolicy
 // such as: Product type, Size, Color, Variant Location or warehouse info
 // Example: TSHIRT-BLK-MED might refer to a black T-shirt in medium size.
 
-class BaseBoard(
+@Entity
+@Table(name = "board")
+class Board(
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    val id: UUID?,
+
+    @Column(name = "name")
     val name: String,
+
+    @Column(name = "sku", nullable = false)
     val sku: String,
+
+    @Column(name = "length", nullable = false)
     val length: Double,
+
+    @Column(name = "width", nullable = false)
     val width: Double,
+
+    @Column(name = "height", nullable = false)
     val height: Double,
-    override val validationPolicies: Iterable<ValidationPolicy> = mutableListOf(),
-    override val values: Map<String, Any> = mutableMapOf()
-): IValidationRequired {
-    init {
-        validate()
-    }
+
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "values_id")
+    val entityValues: EntityValues
+) {
+
 }
