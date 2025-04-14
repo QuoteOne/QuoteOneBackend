@@ -2,15 +2,10 @@ package com.app.service.valdator.impl
 
 import com.app.service.valdator.*
 
-class LessThanValidator : IValidator {
-    override val validationType: ValidationType = ValidationType.LESS_THAN
-    override fun supports(): Iterable<ValueType> {
-        TODO("Not yet implemented")
-    }
-
-    override fun isSupportType(type: ValueType): Boolean {
-        TODO("Not yet implemented")
-    }
+class LessThanValidator : BaseValidator(
+    validationType = ValidationType.LESS_THAN,
+    supportedTypes = setOf(ValueType.NUMBER)
+) {
 
     override fun validate(policy: ValidationPolicy, value: Any?): Validation {
         val numericValue = when (value) {

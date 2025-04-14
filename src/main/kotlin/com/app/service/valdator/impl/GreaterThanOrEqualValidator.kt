@@ -3,15 +3,10 @@ package com.app.service.valdator.impl
 import com.app.service.valdator.*
 
 
-class GreaterThanOrEqualValidator : IValidator {
-    override val validationType: ValidationType = ValidationType.GREATER_THAN_OR_EQUAL
-    override fun supports(): Iterable<ValueType> {
-        TODO("Not yet implemented")
-    }
-
-    override fun isSupportType(type: ValueType): Boolean {
-        TODO("Not yet implemented")
-    }
+class GreaterThanOrEqualValidator : BaseValidator(
+    validationType = ValidationType.GREATER_THAN_OR_EQUAL,
+    supportedTypes = setOf(ValueType.NUMBER)
+) {
 
     override fun validate(policy: ValidationPolicy, value: Any?): Validation {
         val numericValue = when (value) {

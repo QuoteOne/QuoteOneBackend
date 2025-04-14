@@ -7,6 +7,27 @@ import com.app.service.valdator.impl.*
  */
 object ValidatorFactory {
     
+    private val validators = mapOf(
+        ValidationType.REQUIRED to RequiredValidator(),
+        ValidationType.FORMAT_VALIDATION to FormatValidator(),
+        ValidationType.EQUAL to EqualValidator(),
+        ValidationType.NOT_EQUAL to NotEqualValidator(),
+        ValidationType.GREATER_THAN to GreaterThanValidator(),
+        ValidationType.LESS_THAN to LessThanValidator(),
+        ValidationType.GREATER_THAN_OR_EQUAL to GreaterThanOrEqualValidator(),
+        ValidationType.LESS_THAN_OR_EQUAL to LessThanOrEqualValidator(),
+        ValidationType.IN_RANGE to InRangeValidator(),
+        ValidationType.IS_TRUE to IsTrueValidator(),
+        ValidationType.IS_FALSE to IsFalseValidator(),
+        ValidationType.CONTAINS to ContainsValidator(),
+        ValidationType.STARTS_WITH to StartsWithValidator(),
+        ValidationType.ENDS_WITH to EndsWithValidator(),
+        ValidationType.MIN_LENGTH to MinLengthValidator(),
+        ValidationType.MAX_LENGTH to MaxLengthValidator(),
+        ValidationType.REGEX to RegexValidator(),
+        ValidationType.DATE to DateValidator()
+    )
+
     /**
      * Creates and returns an appropriate validator instance based on the validation type.
      * 
@@ -15,31 +36,6 @@ object ValidatorFactory {
      * @throws IllegalArgumentException if the validation type is not supported
      */
     fun createValidator(validationType: ValidationType): IValidator {
-        return when (validationType) {
-            // String validators
-            ValidationType.CONTAINS -> ContainsValidator()
-            ValidationType.STARTS_WITH -> StartsWithValidator()
-            ValidationType.ENDS_WITH -> EndsWithValidator()
-            ValidationType.MIN_LENGTH -> MinLengthValidator()
-            ValidationType.MAX_LENGTH -> MaxLengthValidator()
-            
-            // Number validators
-            ValidationType.GREATER_THAN -> GreaterThanValidator()
-            ValidationType.GREATER_THAN_OR_EQUAL -> GreaterThanOrEqualValidator()
-            ValidationType.LESS_THAN -> LessThanValidator()
-            ValidationType.LESS_THAN_OR_EQUAL -> LessThanOrEqualValidator()
-            ValidationType.NOT_EQUAL -> NotEqualValidator()
-            ValidationType.IN_RANGE -> InRangeValidator()
-
-            // String & Number Validators:
-            ValidationType.EQUAL -> EqualValidator()
-            
-            // Boolean validators
-            ValidationType.IS_TRUE -> IsTrueValidator()
-            ValidationType.IS_FALSE -> IsFalseValidator()
-            
-            // General validators
-            ValidationType.REQUIRED -> RequiredValidator()
-        }
+        return validators[validationType] ?: throw IllegalArgumentException("No validator found for type: $validationType")
     }
 } 
