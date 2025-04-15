@@ -1,6 +1,6 @@
 package com
-import com.app.repository.models.EntityValues
-import com.app.repository.models.ValidationPolicy
+import com.app.repository.common.EntityValues
+import com.app.repository.common.ValidationPolicy
 import com.app.service.valdator.ValidationType
 import com.app.service.valdator.ValueType
 import org.slf4j.LoggerFactory
@@ -31,25 +31,6 @@ class Application(
 ) : CommandLineRunner {
     val logger = LoggerFactory.getLogger(Application::class.java)
     override fun run(vararg args: String?) {
-        val entityValues = EntityValues(
-            id = null,
-
-            values = mutableMapOf(
-                "color" to "black"
-            ),
-            validationPolicies = mutableSetOf(
-                ValidationPolicy(
-                    id = null,
-                    name = "color should be black",
-                    attribute = "color",
-                    validationType = ValidationType.EQUAL,
-                    valueType = ValueType.STRING,
-                    value = "black"
-                )
-            )
-        )
-
-        println(entityValues)
     }
 }
 

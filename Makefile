@@ -1,5 +1,5 @@
 # Variables
-IMAGE_NAME = wichen1214/tofu-hr
+IMAGE_NAME = quoteone/backend
 CURRENT_GIT_HASH = $(shell git rev-parse --short HEAD)
 PREVIOUS_GIT_HASH = $(shell git rev-parse --short HEAD~1)
 DOCKER_TAG = $(IMAGE_NAME):$(CURRENT_GIT_HASH)

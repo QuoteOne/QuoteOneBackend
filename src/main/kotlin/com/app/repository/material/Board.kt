@@ -1,4 +1,4 @@
-package com.app.repository.material_domain
+package com.app.repository.material
 
 import com.app.repository.common.EntityValues
 import jakarta.persistence.CascadeType
@@ -43,7 +43,7 @@ class Board(
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "values_id")
-    val entityValues: EntityValues
+    val attributes: EntityValues
 ) {
 
 }

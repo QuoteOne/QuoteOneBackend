@@ -10,9 +10,3 @@ data class WebProperties(
     @Value("\${jwt-secret}") val jwtSecret: String,
     @Value("\${jwt-valid-seconds}") val jwtValidSeconds: Int,
 )
-
-@ConfigurationProperties(prefix = "firewall")
-data class FirewallProperties(
-    @Value("\${is-firewall-enabled}") val isFirewallEnabled: Boolean,
-    @Value("\${api-key}") val apiKey: String,
-)
