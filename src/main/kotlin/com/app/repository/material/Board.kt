@@ -26,8 +26,8 @@ class Board(
     @Column(name = "id")
     val id: UUID?,
 
-    @Column(name = "name")
-    val name: String,
+    @Column(name = "name", nullable = false)
+    val label: String,
 
     @Column(name = "sku", nullable = false)
     val sku: String,

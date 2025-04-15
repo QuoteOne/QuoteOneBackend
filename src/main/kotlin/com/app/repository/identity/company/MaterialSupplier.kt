@@ -11,7 +11,6 @@ class MaterialSupplier(
     name: String,
     taxId: String,
     address: String,
-    createdAt: LocalDateTime,
     licenseNumber: String?,
     website: String?
-) : BaseCompany(name, taxId, address, createdAt, licenseNumber, website)
+) : BaseCompany(name, taxId, address, licenseNumber, website)

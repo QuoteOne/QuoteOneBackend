@@ -10,8 +10,12 @@ class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
+
+    @Column(name = "label", nullable = false)
     val label: String,
 
+
+    @Column(name = "description", nullable = true)
     val description: String,
 
     @OneToOne(cascade = [CascadeType.ALL])

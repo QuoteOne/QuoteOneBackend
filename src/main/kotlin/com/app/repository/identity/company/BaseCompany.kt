@@ -1,6 +1,8 @@
 package com.app.repository.identity.company
 
 import jakarta.persistence.*
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDateTime
 import java.util.*
 
@@ -12,17 +14,35 @@ abstract class BaseCompany (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
+
+    @Column(name = "name", nullable = false)
     val name: String,
+
+    @Column(name = "tax_id", nullable = true)
     val taxId: String,
+
+    @Column(name = "address", nullable = true)
     val address: String,
-    val createdAt: LocalDateTime,
+
+
+    @Column(name = "license_number", nullable = true)
     var licenseNumber: String?,
-    var website: String?
+
+    @Column(name = "website", nullable = true)
+    var website: String?,
+
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    var createdAt: Date? = null,
+
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    var updatedAt: LocalDateTime? = null
 ) {
     constructor(name: String,
                 taxId: String,
                 address: String,
-                createdAt: LocalDateTime,
                 licenseNumber: String?,
                 website: String?):
             this(
@@ -30,7 +50,6 @@ abstract class BaseCompany (
                 name = name,
                 taxId = taxId,
                 address = address,
-                createdAt = createdAt,
                 licenseNumber = licenseNumber,
                 website = website
     )

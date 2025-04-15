@@ -1,0 +1,54 @@
+categories:
+  - group: 板材類別
+    items:
+      - slug: wide-board
+        label: 寬板
+        description: 用於主結構的寬板
+      - slug: narrow-board
+        label: 窄板
+        description: 配合窄身櫃或邊框使用
+      - slug: short-board
+        label: 短板
+        description: 用於短邊結構
+      - slug: long-board
+        label: 長板
+        description: 用於長邊或橫向結構
+      - slug: ink-board
+        label: 墨板
+        description: 特殊顏色或覆膜板材
+
+  - group: 門板與相關構件
+    items:
+      - slug: door-panel
+        label: 門板本體
+        description: 用於門扇的板件
+      - slug: door-style
+        label: 門板樣式
+        description: 門板造型分類
+      - slug: edge-banding
+        label: 封邊處理
+        description: 門板封邊處理方式
+      - slug: groove
+        label: 裝飾槽孔
+        description: 安裝或裝飾用槽孔
+
+  - group: 抽屜配件
+    items:
+      - slug: drawer-style
+        label: 抽屜樣式
+        description: 抽屜的外觀與結構
+      - slug: drawer-hardware
+        label: 抽屜五金
+        description: 滑軌、拉手等五金
+
+  - group: 板件加工方式
+    items:
+      - slug: drilling
+        label: 鑽孔
+        description: 板件上的鑽孔加工
+      - slug: grooving
+        label: 開槽
+        description: 用於結構或裝飾的開槽
+      - slug: custom-machining
+        label: 其他加工
+        description: 其他特殊加工方式
