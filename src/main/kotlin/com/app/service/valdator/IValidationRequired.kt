@@ -20,7 +20,7 @@ interface IValidationRequired {
     val values: MutableMap<String, Any>
 
     fun validate() {
-        val validator = PolicyValidator(this)
+        val validator = PolicyValidator(validationPolicies, values)
         val exception = validator.validate()
         if (exception != null) throw exception
     }

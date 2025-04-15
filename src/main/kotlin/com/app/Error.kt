@@ -10,3 +10,4 @@ class ValidationException(
 class QuoteOneDomainError(message: String): Exception(message)
 
 val SetValueNotAllowedMissingPolicy = QuoteOneDomainError("SetValueNotAllowed::MissingPolicies")
+val MissingAttributeWhileRelevantPolicyExists = QuoteOneDomainError("MissingAttributeWhileRelevantPolicyExists")

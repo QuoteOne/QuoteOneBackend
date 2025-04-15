@@ -1,21 +1,21 @@
 package com.app.service.valdator
 
+import com.app.MissingAttributeWhileRelevantPolicyExists
 import com.app.ValidationException
-
+import com.app.repository.common.ValidationPolicy
 
 class PolicyValidator(
-    private val validationRequired: IValidationRequired
+    private val validationPolicies: Iterable<ValidationPolicy>,
+    private val values: Map<String, Any>
 ) {
 
     fun validate(): ValidationException? {
-        val policies = validationRequired.validationPolicies
-        val values = validationRequired.values
 
         val failedValidations = mutableListOf<Validation>()
         
-        for (policy in policies) {
+        for (policy in validationPolicies) {
             // Skip if the attribute doesn't exist in the values map
-            val attributeValue = values[policy.attribute] ?: continue
+            val attributeValue = values[policy.attribute] ?: throw MissingAttributeWhileRelevantPolicyExists
             
             // Create a validator instance for this policy's validation type
             val validator = ValidatorFactory.createValidator(policy.validationType)

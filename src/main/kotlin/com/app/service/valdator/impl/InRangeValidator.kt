@@ -5,7 +5,7 @@ import com.app.service.valdator.*
 
 class InRangeValidator : BaseValidator(
     validationType = ValidationType.IN_RANGE,
-    supportedTypes = setOf(ValueType.NUMBER)
+    supportedTypes = setOf(ValueType.STRING)
 ) {
     override val validationType: ValidationType = ValidationType.IN_RANGE
 
@@ -14,7 +14,7 @@ class InRangeValidator : BaseValidator(
 
 
         // Expecting value in format "min,max"
-        val rangeValues = policy.value.split(",").toList()
+        val rangeValues = policy.value.split("-").toList()
         if (rangeValues.size != 2 || rangeValues.any { it.toDoubleOrNull() == null }) {
             return Validation(
                 failed = true,
