@@ -1,4 +1,4 @@
-package com.app.repository.models.company
+package com.app.repository.models.identity.company
 
 import jakarta.persistence.*
 import java.time.LocalDateTime

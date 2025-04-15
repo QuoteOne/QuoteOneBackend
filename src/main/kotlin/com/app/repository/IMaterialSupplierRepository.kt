@@ -1,6 +1,6 @@
 package com.app.repository
 
-import com.app.repository.models.company.MaterialSupplier
+import com.app.repository.models.identity.company.MaterialSupplier
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 

@@ -1,4 +1,4 @@
-package com.app.repository.models
+package com.app.repository.models.common
 
 import com.app.service.valdator.ValidationType
 import com.app.service.valdator.ValueType

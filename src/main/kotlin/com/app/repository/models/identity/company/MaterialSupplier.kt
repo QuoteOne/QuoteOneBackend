@@ -1,12 +1,13 @@
-package com.app.repository.models.company
+package com.app.repository.models.identity.company
 
 import jakarta.persistence.Entity
 import jakarta.persistence.PrimaryKeyJoinColumn
 import java.time.LocalDateTime
 
+
 @Entity
 @PrimaryKeyJoinColumn(name = "company_id")
-class ArchitectureFirm(
+class MaterialSupplier(
     name: String,
     taxId: String,
     address: String,

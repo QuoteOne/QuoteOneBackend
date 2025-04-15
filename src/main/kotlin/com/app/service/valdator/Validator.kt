@@ -1,6 +1,6 @@
 package com.app.service.valdator
 
-import com.app.repository.models.ValidationPolicy
+import com.app.repository.models.common.ValidationPolicy
 
 enum class ValidationType {
     // String
