@@ -5,8 +5,10 @@ import java.time.LocalDateTime
 import java.util.*
 
 
-@MappedSuperclass
-class BaseCompany (
+@Entity
+@Table(name = "company")
+@Inheritance(strategy = InheritanceType.JOINED)
+abstract class BaseCompany (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,

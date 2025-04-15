@@ -1,11 +1,11 @@
 package com.app.repository.models.company
 
 import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import jakarta.persistence.PrimaryKeyJoinColumn
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "architecture_firms")
+@PrimaryKeyJoinColumn(name = "company_id")
 class ArchitectureFirm(
     name: String,
     taxId: String,
