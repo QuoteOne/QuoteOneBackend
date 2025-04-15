@@ -7,7 +7,7 @@ import java.util.*
 
 
 @Entity
-@Table(name = "validation_policy")
+@Table(name = "validation_policies")
 class ValidationPolicy(
     @Id
     @Column(name = "id")

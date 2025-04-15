@@ -1,8 +1,6 @@
 package com.app.service.valdator
 
-class ValidationException(
-    validations: List<Validation>
-): Exception("Validation failed: ${validations.joinToString { it.reason ?: "Unknown reason" }}")
+import com.app.ValidationException
 
 
 class PolicyValidator(

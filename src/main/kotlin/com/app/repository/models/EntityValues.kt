@@ -46,7 +46,11 @@ class EntityValues(
 
 ): IValidationRequired {
     init {
+        validate()
+    }
 
+    fun setValue(attribute: String, value: Any) {
+        values[attribute] = value
         validate()
     }
 }

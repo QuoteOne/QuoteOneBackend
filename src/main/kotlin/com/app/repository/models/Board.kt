@@ -18,7 +18,7 @@ import java.util.*
 // Example: TSHIRT-BLK-MED might refer to a black T-shirt in medium size.
 
 @Entity
-@Table(name = "board")
+@Table(name = "boards")
 class Board(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

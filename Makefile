@@ -7,12 +7,17 @@ DOCKER_TAG = $(IMAGE_NAME):$(CURRENT_GIT_HASH)
 dev:
 	./gradlew bootRun
 
+test:
+	./gradlew test
+
 docker-run:
 	docker run --rm -p 8080:8080 -v $(shell pwd)/src/main/resources:/app/resources $(DOCKER_TAG)
 
 
 docker-build:
 		docker buildx build --platform linux/arm64 -t $(DOCKER_TAG) --load .
+
+
 
 
 # Push the multi-arch image to the registry
