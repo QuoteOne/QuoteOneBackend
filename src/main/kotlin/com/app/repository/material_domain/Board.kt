@@ -1,6 +1,6 @@
-package com.app.repository.models
+package com.app.repository.material_domain
 
-import com.app.repository.models.common.EntityValues
+import com.app.repository.common.EntityValues
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

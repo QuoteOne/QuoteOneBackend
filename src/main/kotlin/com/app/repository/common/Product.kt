@@ -1,4 +1,4 @@
-package com.app.repository.models.common
+package com.app.repository.common
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*

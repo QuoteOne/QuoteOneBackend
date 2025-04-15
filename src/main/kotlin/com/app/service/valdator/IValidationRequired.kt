@@ -1,6 +1,6 @@
 package com.app.service.valdator
 
-import com.app.repository.models.common.ValidationPolicy
+import com.app.repository.common.ValidationPolicy
 
 
 // Don't add more types for simplicity.

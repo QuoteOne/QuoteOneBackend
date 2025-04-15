@@ -1,6 +1,5 @@
-package com.app.repository
+package com.app.repository.common
 
-import com.app.repository.models.common.EntityValues
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 

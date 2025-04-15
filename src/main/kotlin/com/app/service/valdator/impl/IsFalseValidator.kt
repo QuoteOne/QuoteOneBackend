@@ -1,6 +1,6 @@
 package com.app.service.valdator.impl
 
-import com.app.repository.models.common.ValidationPolicy
+import com.app.repository.common.ValidationPolicy
 import com.app.service.valdator.*
 
 

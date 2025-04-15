@@ -1,4 +1,4 @@
-package com.app.repository.models.identity.individual
+package com.app.repository.identity.individual
 
 import com.security.repository.User
 import jakarta.persistence.*

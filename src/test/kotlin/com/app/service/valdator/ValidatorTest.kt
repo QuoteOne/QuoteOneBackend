@@ -1,6 +1,6 @@
 package com.app.service.valdator
 
-import com.app.repository.models.common.ValidationPolicy
+import com.app.repository.common.ValidationPolicy
 import com.app.service.valdator.impl.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*

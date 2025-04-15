@@ -1,7 +1,7 @@
 package com.app.config
 
-import com.app.repository.models.common.EntityValues
-import com.app.repository.models.common.ValidationPolicy
+import com.app.repository.common.EntityValues
+import com.app.repository.common.ValidationPolicy
 import com.security.repository.User
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
