@@ -8,8 +8,6 @@ class IsFalseValidator : BaseValidator(
     validationType = ValidationType.IS_FALSE,
     supportedTypes = setOf(ValueType.BOOLEAN)
 ) {
-    override val validationType: ValidationType = ValidationType.IS_FALSE
-
     override fun validate(policy: ValidationPolicy, value: Any): Validation {
         validateType(policy, value)?.let { return it }
 

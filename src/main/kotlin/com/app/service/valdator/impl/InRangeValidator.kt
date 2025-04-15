@@ -7,8 +7,6 @@ class InRangeValidator : BaseValidator(
     validationType = ValidationType.IN_RANGE,
     supportedTypes = setOf(ValueType.STRING)
 ) {
-    override val validationType: ValidationType = ValidationType.IN_RANGE
-
     override fun validate(policy: ValidationPolicy, value: Any): Validation {
         validateType(policy, value)?.let { return it }
 
