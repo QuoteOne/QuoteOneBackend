@@ -26,6 +26,18 @@ class Product(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     val category: ProductCategory,
+
+
+    // 使用多對多關聯來支持一個產品屬於多個分類
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "product_category_association", // 關聯表名稱
+        joinColumns = [JoinColumn(name = "product_id")], // 產品ID
+        inverseJoinColumns = [JoinColumn(name = "category_id")] // 類別ID
+    )
+    val categories: MutableList<ProductCategory> = mutableListOf()
+
 ) {
     fun getAttribute(attribute: String): Any? {
         return attributes.values[attribute]
