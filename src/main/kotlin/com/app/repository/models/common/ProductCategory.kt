@@ -10,9 +10,8 @@ class ProductCategory (
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
     val name: String,
+    val description: String,
+
     @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val products: MutableList<Product> = mutableListOf(),
-
-    val description: String
-
+    val products: MutableList<Product> = mutableListOf()
 )

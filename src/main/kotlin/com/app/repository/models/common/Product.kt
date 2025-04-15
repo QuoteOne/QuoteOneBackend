@@ -1,5 +1,6 @@
 package com.app.repository.models.common
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.util.UUID
 
@@ -11,14 +12,17 @@ class Product(
     val id: UUID? = null,
     val name: String,
     val price: Double,
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    val category: ProductCategory,
+
 
     val description: String,
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "values_id")
-    val entityValues: EntityValues
+    val entityValues: EntityValues,
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    val category: ProductCategory,
 
 )
