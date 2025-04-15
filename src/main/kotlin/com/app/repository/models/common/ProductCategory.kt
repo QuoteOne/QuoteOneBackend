@@ -9,7 +9,8 @@ class ProductCategory (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
-    val name: String,
+    val slug: String,
+    val label: String,
     val description: String,
 
     @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], orphanRemoval = true)

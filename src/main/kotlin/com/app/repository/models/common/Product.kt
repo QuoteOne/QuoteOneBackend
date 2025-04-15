@@ -10,9 +10,7 @@ class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
-    val name: String,
-    val price: Double,
-
+    val label: String,
 
     val description: String,
 
@@ -24,5 +22,4 @@ class Product(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     val category: ProductCategory,
-
 )
