@@ -7,11 +7,11 @@ import jakarta.persistence.Entity
 import java.util.*
 
 @Entity
-@Form(name = "wide-board")
-class WideBoard(
+@Form(name = "board")
+class Board(
 
     @Transient
-    val category: String = "wide-board",
+    val category: String,
 
     override val id: UUID? = null,
     @Label(name = "名稱")
@@ -24,13 +24,13 @@ class WideBoard(
     override val description: String,
 
     @Label("深度")
-    val depth: Double,
+    val depth: Double? = null,
 
     @Label("寬度")
-    val width: Double,
+    val width: Double? = null,
 
     @Label("高度")
-    val height: Double,
+    val height: Double? = null,
 ): Product(
     label =  label,
     sku = sku,
