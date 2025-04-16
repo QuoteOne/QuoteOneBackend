@@ -1,5 +1,6 @@
 package com.app.service
 
+import com.app.CategorySlugNotFound
 import com.app.repository.common.*
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
@@ -8,6 +9,7 @@ import java.util.UUID
 interface IProductService {
     fun getDefaultCategory(): ProductCategory
     fun addProduct(label: String, sku: String, description: String): Product
+    fun addProduct(product: Product, categorySlug: String): Product
     fun assignCategory(productId: UUID, categoryId: UUID): Product
 }
 
@@ -32,10 +34,21 @@ class ProductService(
         val product = Product(
             description = description,
             label = label,
-            category = defaultCategory,
+            primaryCategory = defaultCategory,
             sku = sku,
-            attributes = EntityValues.empty()
         )
+
+        return productRepository.save(product)
+    }
+
+    @Transactional
+    override fun addProduct(product: Product, categorySlug: String): Product {
+        productCategoryRepository.findBySlug(categorySlug)?.let { category ->
+            product.primaryCategory = category
+        } ?: run {
+            throw CategorySlugNotFound
+        }
+
 
         return productRepository.save(product)
     }

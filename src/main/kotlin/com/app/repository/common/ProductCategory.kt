@@ -33,7 +33,7 @@ class ProductCategory (
     @Column(name = "description", nullable = true)
     var description: String,
 
-    @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "primaryCategory", cascade = [CascadeType.ALL], orphanRemoval = true)
     val products: MutableList<Product> = mutableListOf()
 
 ) {
