@@ -1,6 +1,7 @@
 package com.app.repository.common
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
 import java.util.UUID
 
@@ -18,6 +19,8 @@ class Product(
     @Column(name = "description", nullable = true)
     val description: String,
 
+
+    @JsonProperty("attributes")
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "values_id")
     val attributes: EntityValues,
