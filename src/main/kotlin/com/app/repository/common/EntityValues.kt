@@ -29,7 +29,7 @@ class EntityValues(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    val id: UUID?,
+    val id: UUID? = null,
 
     @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
@@ -52,5 +52,11 @@ class EntityValues(
     fun setValue(attribute: String, value: Any) {
         values[attribute] = value
         validate()
+    }
+
+    companion object {
+        fun empty(): EntityValues {
+            return EntityValues()
+        }
     }
 }

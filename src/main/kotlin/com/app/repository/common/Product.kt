@@ -23,7 +23,7 @@ class Product(
     @JsonProperty("attributes")
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "values_id")
-    val attributes: EntityValues,
+    val attributes: EntityValues = EntityValues.empty(),
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
