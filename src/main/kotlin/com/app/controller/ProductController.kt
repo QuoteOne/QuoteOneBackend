@@ -20,12 +20,13 @@ class ProductController(
 
     data class ProductCreate(
         val label: String,
+        val sku: String,
         val description: String
     )
 
     @PostMapping
     fun addProduct(@RequestBody product: ProductCreate): ResponseEntity<Product> {
-        val savedProduct =productService.addProduct(product.label, product.description)
+        val savedProduct =productService.addProduct(product.label, product.sku, product.description)
         return ResponseEntity.ok(savedProduct)
     }
 }

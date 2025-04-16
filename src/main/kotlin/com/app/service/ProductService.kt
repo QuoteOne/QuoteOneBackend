@@ -7,7 +7,7 @@ import java.util.UUID
 
 interface IProductService {
     fun getDefaultCategory(): ProductCategory
-    fun addProduct(label: String, description: String): Product
+    fun addProduct(label: String, sku: String, description: String): Product
     fun assignCategory(productId: UUID, categoryId: UUID): Product
 }
 
@@ -26,13 +26,14 @@ class ProductService(
     }
 
     @Transactional
-    override fun addProduct(label: String, description: String): Product {
+    override fun addProduct(label: String, sku: String,description: String): Product {
         val defaultCategory = getDefaultCategory()
 
         val product = Product(
             description = description,
             label = label,
             category = defaultCategory,
+            sku = sku,
             attributes = EntityValues.empty()
         )
 

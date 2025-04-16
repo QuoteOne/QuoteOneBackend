@@ -28,7 +28,16 @@ class ValidationPolicy(
     @Enumerated(EnumType.STRING)
     val valueType: ValueType,
 
-    @Column(name = "value", nullable = false)
+    @Column(name = "value", nullable = false, columnDefinition = "TEXT")
     val value: String,
-)
+) {
+    constructor(name: String, attribute: String, validationType: ValidationType, valueType: ValueType, value: String): this(
+        id = null,
+        name = name,
+        attribute = attribute,
+        validationType = validationType,
+        valueType = valueType,
+        value = value
+    )
+}
 

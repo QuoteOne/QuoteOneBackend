@@ -6,6 +6,11 @@ import jakarta.persistence.*
 import java.util.UUID
 
 
+interface IProductMappable<T> {
+    fun asProduct(): Product
+    fun withProduct(product: Product): T
+}
+
 @Entity
 class Product(
     @Id
@@ -19,6 +24,10 @@ class Product(
     @Column(name = "description", nullable = true)
     val description: String,
 
+    @Column(name = "sku", nullable = false, unique = true)
+    val sku: String,
+
+
 
     @JsonProperty("attributes")
     @OneToOne(cascade = [CascadeType.ALL])
@@ -26,9 +35,9 @@ class Product(
     val attributes: EntityValues = EntityValues.empty(),
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
-    val category: ProductCategory,
+    val category: ProductCategory? = null,
 
 
     // 使用多對多關聯來支持一個產品屬於多個分類
@@ -46,11 +55,12 @@ class Product(
         return attributes.values[attribute]
     }
 
-    constructor(category: ProductCategory, label: String, description: String, attributes: EntityValues = EntityValues.empty()): this(
+    constructor(label: String, sku: String,description: String, attributes: EntityValues = EntityValues.empty(), category: ProductCategory? = null): this(
+        id = null,
         label = label,
         description = description,
         attributes = attributes,
-        id = null,
+        sku = sku,
         category = category
     )
 }
