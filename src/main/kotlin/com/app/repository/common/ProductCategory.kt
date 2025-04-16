@@ -21,17 +21,17 @@ class ProductCategory (
 
 
     @Column(name = "group_name", nullable = false)
-    val groupName: String,
+    var groupName: String,
 
 
     @Column(name = "slug", nullable = false)
-    val slug: String,
+    var slug: String,
 
     @Column(name = "label", nullable = false)
     var label: String,
 
     @Column(name = "description", nullable = true)
-    val description: String,
+    var description: String,
 
     @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], orphanRemoval = true)
     val products: MutableList<Product> = mutableListOf()

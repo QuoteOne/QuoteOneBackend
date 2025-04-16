@@ -7,5 +7,6 @@ import java.util.UUID
 
 @Repository
 interface IProductCategoryRepository: JpaRepository<ProductCategory, UUID> {
-    fun existsProductCategoryBySlug(slug: String): Boolean
+    fun existsBySlug(slug: String): Boolean
+    fun findBySlug(slug: String): ProductCategory?
 }

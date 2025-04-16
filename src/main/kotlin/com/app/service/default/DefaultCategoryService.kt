@@ -57,17 +57,35 @@ class DefaultCategoryService(
     val categoryRepository: IProductCategoryRepository
 ) {
 
+    val DEFAULT = "DEFAULT"
+
     @PostConstruct
     fun init() {
+        insertDefaultCategory()
         val groups = getCategoryGroups()
         populateGroups(groups)
+    }
+
+    private fun insertDefaultCategory() {
+        if (!categoryRepository.existsBySlug(DEFAULT)) {
+            categoryRepository.save(createDefaultCategory())
+        }
+    }
+
+    private fun createDefaultCategory(): ProductCategory {
+        return ProductCategory(
+            groupName = DEFAULT,
+            slug = DEFAULT,
+            label = DEFAULT,
+            description = ""
+        )
     }
 
 
     fun populateGroups(groups: Iterable<CategoryGroup>) {
         groups.forEach outer@{ categoryGroup ->
             categoryGroup.items.forEach {
-                val isExist = categoryRepository.existsProductCategoryBySlug(it.slug)
+                val isExist = categoryRepository.existsBySlug(it.slug)
                 if (isExist) return@outer
                 val category = ProductCategory(groupName = categoryGroup.group, slug = it.slug, label = it.label, description = it.description)
                 categoryRepository.save(category)

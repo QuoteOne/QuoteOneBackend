@@ -45,4 +45,12 @@ class Product(
     fun getAttribute(attribute: String): Any? {
         return attributes.values[attribute]
     }
+
+    constructor(category: ProductCategory, label: String, description: String, attributes: EntityValues = EntityValues.empty()): this(
+        label = label,
+        description = description,
+        attributes = attributes,
+        id = null,
+        category = category
+    )
 }

@@ -5,7 +5,6 @@ import com.app.repository.identity.company.ArchitectureFirm
 import com.app.repository.identity.company.BaseCompany
 import com.app.repository.identity.company.MaterialSupplier
 import com.app.repository.identity.individual.DesignerProfile
-import com.app.service.mapper.MaterialMapper
 import com.security.repository.User
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

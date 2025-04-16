@@ -1,26 +1,10 @@
 package com.app.repository.common
 
 import com.app.service.valdator.IValidationRequired
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.util.*
-
-
-@Converter
-class HashMapConverter : AttributeConverter<MutableMap<String, Any>, String> {
-
-    private val mapper = jacksonObjectMapper()
-
-    override fun convertToDatabaseColumn(attribute: MutableMap<String, Any>?): String {
-        return attribute?.let { mapper.writeValueAsString(it) } ?: "{}"
-    }
-
-    override fun convertToEntityAttribute(rawString: String?): MutableMap<String, Any> {
-        return rawString?.let { mapper.readValue<MutableMap<String, Any>>(it) } ?: mutableMapOf()
-    }
-}
-
 
 
 @Entity
@@ -40,7 +24,7 @@ class EntityValues(
     override val validationPolicies: MutableSet<ValidationPolicy> = mutableSetOf(),
 
 
-    @Convert(converter = HashMapConverter::class)
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "values", columnDefinition = "json")
     override var values: MutableMap<String, Any> = mutableMapOf()
 
