@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-
-
+import java.util.UUID
 
 
 @RestController
@@ -25,6 +24,21 @@ class ProductController(
         val label: String,
         val sku: String,
         val description: String
+    )
+
+    data class ProductCategoryChange(
+        val productId: UUID,
+        val targetCategoryId: UUID
+    )
+
+    data class KitProductAdd(
+        val productId: UUID,
+        val kitId: UUID
+    )
+
+    data class KitProductRemove(
+        val productId: UUID,
+        val kitId: UUID
     )
 
     @PostMapping
@@ -57,4 +71,21 @@ class ProductController(
         return ResponseEntity.ok(savedProduct)
     }
 
+    @PostMapping("/change-category")
+    fun changeProductCategory(@RequestBody change: ProductCategoryChange): ResponseEntity<Product> {
+        val savedProduct = productService.changeProductCategory(change.productId, change.targetCategoryId)
+        return ResponseEntity.ok(savedProduct)
+    }
+
+    @PostMapping("/add-kit")
+    fun addKitToProduct(@RequestBody kit: KitProductAdd): ResponseEntity<Product> {
+        val savedProduct = productService.addKitToProduct(kit.productId, kit.kitId)
+        return ResponseEntity.ok(savedProduct)
+    }
+
+    @PostMapping("/remove-kit")
+    fun removeKitFromProduct(@RequestBody kit: KitProductRemove): ResponseEntity<Product> {
+        val savedProduct = productService.removeKitFromProduct(kit.productId, kit.kitId)
+        return ResponseEntity.ok(savedProduct)
+    }
 }

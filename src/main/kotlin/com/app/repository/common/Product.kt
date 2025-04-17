@@ -67,7 +67,7 @@ class Product(
         joinColumns = [JoinColumn(name = "id")],
         inverseJoinColumns = [JoinColumn(name = "kit_product_id")]
     )
-    val kits: MutableList<Product> = mutableListOf(),
+    val kits: MutableSet<Product> = mutableSetOf(),
 ): ProductAware {
     constructor(
         label: String,

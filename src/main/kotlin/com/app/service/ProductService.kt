@@ -1,16 +1,19 @@
 package com.app.service
 
-import com.app.CategorySlugNotFound
+import com.app.*
 import com.app.repository.common.*
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.util.UUID
+import kotlin.jvm.optionals.getOrNull
 
 interface IProductService {
     fun getDefaultCategory(): ProductCategory
     fun addProduct(label: String, sku: String, description: String): Product
     fun addProductWithCategorySlug(product: Product, categorySlug: String): Product
-    fun assignCategory(productId: UUID, categoryId: UUID): Product
+    fun changeProductCategory(productId: UUID, categoryId: UUID): Product
+    fun addKitToProduct(productId: UUID, kitId: UUID): Product
+    fun removeKitFromProduct(productId: UUID, kitId: UUID): Product
 }
 
 
@@ -53,9 +56,47 @@ class ProductService(
         return productRepository.save(product)
     }
 
-    @Transactional
-    override fun assignCategory(productId: UUID, categoryId: UUID): Product {
-        TODO("Not yet implemented")
+    fun isSameCategoryGroup(
+        productCategory: ProductCategory,
+        targetCategory: ProductCategory
+    ): Boolean {
+        return productCategory.groupName == targetCategory.groupName
     }
 
+    @Transactional
+    override fun changeProductCategory(productId: UUID, categoryId: UUID): Product {
+        val targetCategory = productCategoryRepository.findById(categoryId).getOrNull() ?: throw CategoryNotFound
+        val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
+
+
+        if (!isSameCategoryGroup(product.primaryCategory!!, targetCategory)) {
+            throw CategoryGroupNotSame
+        }
+
+
+        product.primaryCategory = targetCategory
+        return productRepository.save(product)
+    }
+
+    override fun addKitToProduct(productId: UUID, kitId: UUID): Product {
+        val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
+        val kit = productRepository.findById(kitId).getOrNull() ?: throw KitProductNotFound
+
+        if (product.kits.contains(kit)) {
+            throw KitAlreadyExistsInProduct
+        }
+        product.kits.add(kit)
+        return productRepository.save(product)
+    }
+
+    override fun removeKitFromProduct(productId: UUID, kitId: UUID): Product {
+        val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
+        val kit = productRepository.findById(kitId).getOrNull() ?: throw KitProductNotFound
+
+        if (!product.kits.contains(kit)) {
+            throw KitNotFoundInProduct
+        }
+        product.kits.remove(kit)
+        return productRepository.save(product)
+    }
 }
