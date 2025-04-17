@@ -6,7 +6,7 @@ import java.util.UUID
 
 @Entity
 @Table(
-    name = "product_category",
+    name = "product_categories",
     uniqueConstraints = [
         UniqueConstraint(name = "slug-label-unique", columnNames = ["slug", "label"])
     ],

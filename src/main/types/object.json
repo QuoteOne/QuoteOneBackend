@@ -1,0 +1,71 @@
+[
+  {
+    "category": "door-panel",
+    "label": "Shaker Style White Matte",
+    "sku": "DP-WM-SHK-001",
+    "description": "Classic shaker-style door panel with a smooth white matte finish, ideal for modern and traditional kitchen designs.",
+    "style": "Shaker",
+    "edgeBanding": "PVC 1mm White",
+    "groove": "No Groove",
+    "attributes": {
+      "values": {
+          "finish": "Matte",
+          "moistureResistant": true,
+          "fingerprintResistant": true,
+          "color": "White",
+          "coreMaterial": "MDF"
+      }
+    }
+  },
+  {
+    "category": "wide-board",
+    "label": "Melamine Particle Board Oak",
+    "sku": "BD-MPB-OAK-1224",
+    "description": "Oak-finished melamine particle board suitable for cabinet carcasses and shelves.",
+    "depth": 18.0,
+    "width": 1220.0,
+    "height": 2440.0,
+    "attributes": {
+      "values": {
+        "material": "Particle Board",
+        "surfaceFinish": "Melamine",
+        "color": "Oak",
+        "waterResistant": false,
+        "fireResistant": false,
+        "usage": "Cabinet Body"
+      }
+    }
+  },
+  {
+    "category": "drawer-hardware",
+    "label": "Slim Metal Drawer Box",
+    "sku": "DR-MTL-SLM-001",
+    "description": "Slim-profile metal drawer with soft-close mechanism, ideal for modern kitchens and wardrobes.",
+    "style": "Slim Metal Box",
+    "attributes": {
+      "values": {
+          "material": "Metal",
+          "mechanism": "Soft Close",
+          "color": "Dark Grey",
+          "loadCapacity": "40kg",
+          "compatibleWith": "Blum Tandem"
+        }
+    }
+  },
+  {
+    "category": "drilling",
+    "label": "Edge Banding Service",
+    "sku": "PRC-EDG-001",
+    "description": "Professional edge banding service using 1mm PVC with precision glue line application.",
+    "processingType": "Edge Banding",
+    "attributes": {
+      "values": {
+        "bandingMaterial": "PVC",
+        "bandingThickness": "1mm",
+        "machine": "Homag EDGETEQ",
+        "glueType": "PUR",
+        "colorMatch": true
+      }
+    }
+  }
+]

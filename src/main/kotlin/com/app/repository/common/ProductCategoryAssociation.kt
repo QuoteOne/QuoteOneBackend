@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "product_category_association",
+@Table(name = "product_category_associations",
     uniqueConstraints = [
         UniqueConstraint(
             name = "category_association_unique",

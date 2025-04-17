@@ -6,7 +6,7 @@ import java.util.UUID
 
 
 @Entity
-@Table(name = "product_association",
+@Table(name = "product_associations",
     uniqueConstraints = [
         UniqueConstraint(
             name = "product_association_unique",

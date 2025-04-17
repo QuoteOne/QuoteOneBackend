@@ -9,7 +9,7 @@ import java.util.UUID
 interface IProductService {
     fun getDefaultCategory(): ProductCategory
     fun addProduct(label: String, sku: String, description: String): Product
-    fun addProduct(product: Product, categorySlug: String): Product
+    fun addProductWithCategorySlug(product: Product, categorySlug: String): Product
     fun assignCategory(productId: UUID, categoryId: UUID): Product
 }
 
@@ -42,7 +42,7 @@ class ProductService(
     }
 
     @Transactional
-    override fun addProduct(product: Product, categorySlug: String): Product {
+    override fun addProductWithCategorySlug(product: Product, categorySlug: String): Product {
         productCategoryRepository.findBySlug(categorySlug)?.let { category ->
             product.primaryCategory = category
         } ?: run {
@@ -53,6 +53,7 @@ class ProductService(
         return productRepository.save(product)
     }
 
+    @Transactional
     override fun assignCategory(productId: UUID, categoryId: UUID): Product {
         TODO("Not yet implemented")
     }

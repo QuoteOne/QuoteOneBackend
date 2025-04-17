@@ -59,15 +59,21 @@ class SpringSecurityConfig(
     }
 
 
+//    fun withDefaultChain(): Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> {
+//        return Customizer { auth ->
+//            auth
+//                .requestMatchers(*webProperties.unprotectedRoutes.toTypedArray()).permitAll()
+//                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+//                .requestMatchers("/api/user/**").hasRole("USER")
+//                .requestMatchers("/api/private/**").hasRole("GUEST")
+//                .anyRequest().authenticated()
+//        }
+//    }
     fun withDefaultChain(): Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> {
         return Customizer { auth ->
             auth
-                .requestMatchers(*webProperties.unprotectedRoutes.toTypedArray()).permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/user/**").hasRole("USER")
-                .requestMatchers("/api/private/**").hasRole("GUEST")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll() // Allow all requests without authentication
         }
     }
 
