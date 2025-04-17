@@ -61,7 +61,8 @@ class ProductService(
         productCategory: ProductCategory,
         targetCategory: ProductCategory
     ): Boolean {
-        return productCategory.groupName == targetCategory.groupName
+        return productCategory.id == targetCategory.id &&
+                productCategory.group.id == targetCategory.group.id
     }
 
     @Transactional

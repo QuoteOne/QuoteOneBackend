@@ -1,7 +1,9 @@
 package com.app.service.default
 
+import com.app.repository.common.IProductCategoryGroupRepository
 import com.app.repository.common.IProductCategoryRepository
 import com.app.repository.common.ProductCategory
+import com.app.repository.common.ProductCategoryGroup
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Qualifier
@@ -45,58 +47,65 @@ class DefaultCategoryFileConfig(
 }
 
 
-
-
 @Service
 class DefaultCategoryService(
     @Qualifier("default-categories")
-    val defaultCategoryConfig: InputStream,
+    private val defaultCategoryConfig: InputStream,
+
     @Qualifier("Yaml")
-    val yamlMapper: ObjectMapper,
+    private val yamlMapper: ObjectMapper,
 
-    val categoryRepository: IProductCategoryRepository
+    private val categoryRepository: IProductCategoryRepository,
+    private val categoryGroupRepository: IProductCategoryGroupRepository
 ) {
-
-    val DEFAULT = "DEFAULT"
+    companion object {
+        const val DEFAULT = "DEFAULT"
+    }
 
     @PostConstruct
     fun init() {
-        insertDefaultCategory()
+        insertDefaultGroupAndCategory()
         val groups = getCategoryGroups()
         populateGroups(groups)
     }
 
-    private fun insertDefaultCategory() {
-        if (!categoryRepository.existsBySlug(DEFAULT)) {
-            categoryRepository.save(createDefaultCategory())
+    private fun insertDefaultGroupAndCategory() {
+        val group = categoryGroupRepository.findBySlug(DEFAULT)
+            ?: categoryGroupRepository.save(
+                ProductCategoryGroup(slug = DEFAULT, label = DEFAULT, description = "")
+            )
+
+        if (!categoryRepository.existsByGroupSlugAndSlug(DEFAULT, DEFAULT)) {
+            categoryRepository.save(
+                ProductCategory(group = group, slug = DEFAULT, label = DEFAULT, description = "")
+            )
         }
     }
 
-    private fun createDefaultCategory(): ProductCategory {
-        return ProductCategory(
-            groupName = DEFAULT,
-            slug = DEFAULT,
-            label = DEFAULT,
-            description = ""
-        )
-    }
-
-
     fun populateGroups(groups: Iterable<CategoryGroup>) {
-        groups.forEach outer@{ categoryGroup ->
-            categoryGroup.items.forEach {
-                val isExist = categoryRepository.existsBySlug(it.slug)
-                if (isExist) return@outer
-                val category = ProductCategory(groupName = categoryGroup.group, slug = it.slug, label = it.label, description = it.description)
-                categoryRepository.save(category)
+        groups.forEach { categoryGroup ->
+            val groupSlug = categoryGroup.group
+            val group = categoryGroupRepository.findBySlug(groupSlug)
+                ?: categoryGroupRepository.save(
+                    ProductCategoryGroup(slug = groupSlug, label = groupSlug, description = "")
+                )
+
+            categoryGroup.items.forEach { item ->
+                val exists = categoryRepository.existsByGroupSlugAndSlug(groupSlug, item.slug)
+                if (!exists) {
+                    val category = ProductCategory(
+                        group = group,
+                        slug = item.slug,
+                        label = item.label,
+                        description = item.description
+                    )
+                    categoryRepository.save(category)
+                }
             }
         }
     }
 
-
     fun getCategoryGroups(): Iterable<CategoryGroup> {
-        val wrapper = yamlMapper.readValue(defaultCategoryConfig, CategoryGroupWrapper::class.java)
-        return wrapper.default
-
+        return yamlMapper.readValue(defaultCategoryConfig, CategoryGroupWrapper::class.java).default
     }
 }
