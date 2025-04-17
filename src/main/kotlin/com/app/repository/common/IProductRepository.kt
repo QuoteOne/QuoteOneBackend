@@ -6,3 +6,7 @@ import java.util.UUID
 
 @Repository
 interface IProductRepository: JpaRepository<Product, UUID>
+
+
+@Repository
+interface IPricingProfileRepository: JpaRepository<PricingProfile, UUID>

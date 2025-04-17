@@ -68,6 +68,12 @@ class Product(
         inverseJoinColumns = [JoinColumn(name = "kit_product_id")]
     )
     val kits: MutableSet<Product> = mutableSetOf(),
+
+
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    val pricingProfiles: MutableSet<PricingProfile> = mutableSetOf(),
+
+
 ): ProductAware {
     constructor(
         label: String,
