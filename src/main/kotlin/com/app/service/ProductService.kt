@@ -12,8 +12,8 @@ interface IProductService {
     fun addProduct(label: String, sku: String, description: String): Product
     fun addProductWithCategorySlug(product: Product, categorySlug: String): Product
     fun changeProductCategory(productId: UUID, categoryId: UUID): Product
-    fun addKitToProduct(productId: UUID, kitId: UUID): Product
-    fun removeKitFromProduct(productId: UUID, kitId: UUID): Product
+    fun addKitToProduct(productId: UUID, kitsId: UUID): Product
+    fun removeKitFromProduct(productId: UUID, kitsId: UUID): Product
 }
 
 
@@ -21,6 +21,7 @@ interface IProductService {
 class ProductService(
     val productCategoryRepository: IProductCategoryRepository,
     val productRepository: IProductRepository,
+    val kitsRepository: IKitsRepository
 ): IProductService {
 
     val DEFAULT = "DEFAULT"
@@ -78,9 +79,9 @@ class ProductService(
         return productRepository.save(product)
     }
 
-    override fun addKitToProduct(productId: UUID, kitId: UUID): Product {
+    override fun addKitToProduct(productId: UUID, kitsId: UUID): Product {
         val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
-        val kit = productRepository.findById(kitId).getOrNull() ?: throw KitProductNotFound
+        val kit = kitsRepository.findById(kitsId).getOrNull() ?: throw KitProductNotFound
 
         if (product.kits.contains(kit)) {
             throw KitAlreadyExistsInProduct
@@ -89,9 +90,9 @@ class ProductService(
         return productRepository.save(product)
     }
 
-    override fun removeKitFromProduct(productId: UUID, kitId: UUID): Product {
+    override fun removeKitFromProduct(productId: UUID, kitsId: UUID): Product {
         val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
-        val kit = productRepository.findById(kitId).getOrNull() ?: throw KitProductNotFound
+        val kit = productRepository.findById(kitsId).getOrNull() ?: throw KitProductNotFound
 
         if (!product.kits.contains(kit)) {
             throw KitNotFoundInProduct

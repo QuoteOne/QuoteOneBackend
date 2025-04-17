@@ -12,7 +12,7 @@ class ValidationPolicyDefaults {
             attribute = "height",
             validationType = ValidationType.GREATER_THAN,
             valueType = ValueType.NUMBER,
-            value = "0"
+            value = 0.0
         )
 
         val PolicyWidthShouldGreaterThanZero = ValidationPolicy(
@@ -20,7 +20,7 @@ class ValidationPolicyDefaults {
             attribute = "height",
             validationType = ValidationType.GREATER_THAN,
             valueType = ValueType.NUMBER,
-            value = "0"
+            value = 0.0
         )
 
         val PolicyDepthShouldGreaterThanZero = ValidationPolicy(
@@ -28,7 +28,7 @@ class ValidationPolicyDefaults {
             attribute = "height",
             validationType = ValidationType.GREATER_THAN,
             valueType = ValueType.NUMBER,
-            value = "0"
+            value = 0.0
         )
     }
 }

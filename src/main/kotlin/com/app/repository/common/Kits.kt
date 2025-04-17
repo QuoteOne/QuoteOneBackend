@@ -1,15 +1,20 @@
-package com.app.repository.material.repository.models
+package com.app.repository.common
 
 import com.app.annotations.Form
 import com.app.annotations.Label
-import com.app.repository.common.Product
 import jakarta.persistence.*
 import kotlin.jvm.Transient
 
+
+enum class KitsType(val value: String) {
+    MUST_HAVE("MUST_HAVE"),
+    OPTIONAL("OPTIONAL"),
+}
+
 @Entity
-@Form(name = "board")
-@Table(name = "boards")
-class Board(
+@Form(name = "kits")
+@Table(name = "kits")
+class Kits(
     @Transient
     val category: String,
 
@@ -22,21 +27,14 @@ class Board(
     @Label(name = "描述")
     override var description: String,
 
-    @Label("深度")
-    var depth: Double? = null,
-
-    @Label("寬度")
-    var width: Double? = null,
-
-    @Label("高度")
-    var height: Double? = null,
-
+    @Label(name = "選購類型")
+    @Enumerated(EnumType.STRING)
+    val type: KitsType = KitsType.OPTIONAL
 ) : Product(
     label = label,
     sku = sku,
     description = description,
 ) {
-
     @PostLoad
     fun init() {
         super.apply(super.label, super.sku, super.description)

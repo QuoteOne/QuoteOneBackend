@@ -63,11 +63,11 @@ class Product(
 
     @OneToMany
     @JoinTable(
-        name = "kits_products",
+        name = "kits_products_link",
         joinColumns = [JoinColumn(name = "id")],
         inverseJoinColumns = [JoinColumn(name = "kit_product_id")]
     )
-    val kits: MutableSet<Product> = mutableSetOf(),
+    val kits: MutableSet<Kits> = mutableSetOf(),
 
 
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
