@@ -1,5 +1,6 @@
 default:
   - group: 板材類別
+    slug: board-category
     items:
       - slug: wide-board
         label: 寬板
@@ -18,6 +19,7 @@ default:
         description: 特殊顏色或覆膜板材
 
   - group: 門板與相關構件
+    slug: door-components
     items:
       - slug: door-panel
         label: 門板本體
@@ -33,6 +35,7 @@ default:
         description: 安裝或裝飾用槽孔
 
   - group: 抽屜配件
+    slug: drawer-accessories
     items:
       - slug: drawer-style
         label: 抽屜樣式
@@ -40,15 +43,3 @@ default:
       - slug: drawer-hardware
         label: 抽屜五金
         description: 滑軌、拉手等五金
-
-  - group: 板件加工方式
-    items:
-      - slug: drilling
-        label: 鑽孔
-        description: 板件上的鑽孔加工
-      - slug: grooving
-        label: 開槽
-        description: 用於結構或裝飾的開槽
-      - slug: custom-machining
-        label: 其他加工
-        description: 其他特殊加工方式

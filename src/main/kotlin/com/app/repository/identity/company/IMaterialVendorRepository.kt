@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface IMaterialSupplierRepository: JpaRepository<MaterialSupplier, UUID>
+interface IMaterialVendorRepository: JpaRepository<MaterialVendor, UUID>

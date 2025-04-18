@@ -15,7 +15,7 @@ class EntityValues(
     @Column(name = "id")
     val id: UUID? = null,
 
-    @ManyToMany(cascade = [CascadeType.ALL])
+    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     @JoinTable(
         name = "entity_values_validation_policy",
         joinColumns = [JoinColumn(name = "entity_id")],

@@ -39,5 +39,14 @@ class ValidationPolicy(
         valueType = valueType,
         value = value
     )
+
+    constructor(name: String, attribute: String, validationType: ValidationType, valueType: ValueType, value: Double): this(
+        id = null,
+        name = name,
+        attribute = attribute,
+        validationType = validationType,
+        valueType = valueType,
+        value = value.toString()
+    )
 }
 

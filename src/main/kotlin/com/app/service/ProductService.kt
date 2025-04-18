@@ -1,16 +1,19 @@
 package com.app.service
 
-import com.app.CategorySlugNotFound
+import com.app.*
 import com.app.repository.common.*
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.util.UUID
+import kotlin.jvm.optionals.getOrNull
 
 interface IProductService {
     fun getDefaultCategory(): ProductCategory
     fun addProduct(label: String, sku: String, description: String): Product
-    fun addProduct(product: Product, categorySlug: String): Product
-    fun assignCategory(productId: UUID, categoryId: UUID): Product
+    fun addProductWithCategorySlug(product: Product, categorySlug: String): Product
+    fun changeProductCategory(productId: UUID, categoryId: UUID): Product
+    fun addKitToProduct(productId: UUID, kitsId: UUID): Product
+    fun removeKitFromProduct(productId: UUID, kitsId: UUID): Product
 }
 
 
@@ -18,6 +21,7 @@ interface IProductService {
 class ProductService(
     val productCategoryRepository: IProductCategoryRepository,
     val productRepository: IProductRepository,
+    val kitsRepository: IKitsRepository
 ): IProductService {
 
     val DEFAULT = "DEFAULT"
@@ -42,7 +46,7 @@ class ProductService(
     }
 
     @Transactional
-    override fun addProduct(product: Product, categorySlug: String): Product {
+    override fun addProductWithCategorySlug(product: Product, categorySlug: String): Product {
         productCategoryRepository.findBySlug(categorySlug)?.let { category ->
             product.primaryCategory = category
         } ?: run {
@@ -53,8 +57,48 @@ class ProductService(
         return productRepository.save(product)
     }
 
-    override fun assignCategory(productId: UUID, categoryId: UUID): Product {
-        TODO("Not yet implemented")
+    fun isSameCategoryGroup(
+        productCategory: ProductCategory,
+        targetCategory: ProductCategory
+    ): Boolean {
+        return productCategory.id == targetCategory.id &&
+                productCategory.group.id == targetCategory.group.id
     }
 
+    @Transactional
+    override fun changeProductCategory(productId: UUID, categoryId: UUID): Product {
+        val targetCategory = productCategoryRepository.findById(categoryId).getOrNull() ?: throw CategoryNotFound
+        val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
+
+
+        if (!isSameCategoryGroup(product.primaryCategory!!, targetCategory)) {
+            throw CategoryGroupNotSame
+        }
+
+
+        product.primaryCategory = targetCategory
+        return productRepository.save(product)
+    }
+
+    override fun addKitToProduct(productId: UUID, kitsId: UUID): Product {
+        val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
+        val kit = kitsRepository.findById(kitsId).getOrNull() ?: throw KitProductNotFound
+
+        if (product.kits.contains(kit)) {
+            throw KitAlreadyExistsInProduct
+        }
+        product.kits.add(kit)
+        return productRepository.save(product)
+    }
+
+    override fun removeKitFromProduct(productId: UUID, kitsId: UUID): Product {
+        val product = productRepository.findById(productId).getOrNull() ?: throw ProductNotFound
+        val kit = productRepository.findById(kitsId).getOrNull() ?: throw KitProductNotFound
+
+        if (!product.kits.contains(kit)) {
+            throw KitNotFoundInProduct
+        }
+        product.kits.remove(kit)
+        return productRepository.save(product)
+    }
 }
