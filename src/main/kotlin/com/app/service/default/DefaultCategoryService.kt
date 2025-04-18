@@ -18,6 +18,7 @@ import java.io.InputStream
 
 data class CategoryGroup(
     val group: String,
+    val slug: String,
     val items: List<CategoryItem>
 )
 
@@ -84,10 +85,12 @@ class DefaultCategoryService(
 
     fun populateGroups(groups: Iterable<CategoryGroup>) {
         groups.forEach { categoryGroup ->
-            val groupSlug = categoryGroup.group
+            val groupName = categoryGroup.group
+            val groupSlug = categoryGroup.slug
+
             val group = categoryGroupRepository.findBySlug(groupSlug)
                 ?: categoryGroupRepository.save(
-                    ProductCategoryGroup(slug = groupSlug, label = groupSlug, description = "")
+                    ProductCategoryGroup(slug = groupSlug, label = groupName, description = "")
                 )
 
             categoryGroup.items.forEach { item ->

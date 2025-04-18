@@ -8,7 +8,6 @@ import com.app.repository.identity.individual.DesignerProfile
 import com.app.repository.material.repository.models.Board
 import com.app.repository.material.repository.models.DoorPanel
 import com.app.repository.material.repository.models.Drawer
-import com.app.repository.material.repository.models.Processing
 import com.security.repository.User
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -38,7 +37,6 @@ class SpringDataRestConfig {
 
                 Board::class.java,
                 Drawer::class.java,
-                Processing::class.java,
                 DoorPanel::class.java
             )
         }
